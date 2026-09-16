@@ -1311,6 +1311,829 @@
 .btn-facebook-reel svg {
   flex-shrink: 0;
 }
+
+      /* =========================================================
+         PROGRAMME (KOTOUF 2) — intégré depuis test.html,
+         adapté aux tokens et polices du site principal
+         ========================================================= */
+
+
+/* =========================================================
+   KOTOUF PROGRAM — MAIN
+   ========================================================= */
+
+#kotouf-programme {
+    --kotouf-bg: var(--sable);
+    --kotouf-card: var(--blanc);
+    --kotouf-text: var(--encre);
+    --kotouf-muted: var(--encre-doux);
+    --kotouf-border: rgba(21, 54, 80, 0.15);
+    --kotouf-accent: var(--terracotta);
+
+    background: var(--kotouf-bg);
+    color: var(--kotouf-text);
+
+    padding: 112px 6%;
+    font-family: "Newsreader", serif;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.program-header {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.program-eyebrow {
+    display: inline-block;
+
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--kotouf-accent);
+
+    margin-bottom: 20px;
+    opacity: 1;
+}
+
+.program-header h2 {
+    margin: 0;
+
+    font-family: "Archivo", sans-serif;
+
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: .95;
+
+    font-weight: 900;
+    letter-spacing: -.02em;
+}
+
+.program-subtitle {
+    margin: 25px 0 18px;
+
+    font-family: "Newsreader", serif;
+
+    font-size: clamp(20px, 3vw, 30px);
+
+    font-style: italic;
+}
+
+.program-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 12px;
+    letter-spacing: .16em;
+    font-weight: 600;
+
+    color: var(--kotouf-muted);
+}
+
+.info-separator {
+    opacity: .5;
+}
+
+
+/* =========================================================
+   LANGUAGE
+   ========================================================= */
+
+.language-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+
+    margin: 45px auto 20px;
+
+    padding: 4px;
+
+    width: fit-content;
+
+    border: 1px solid var(--kotouf-border);
+    border-radius: 50px;
+}
+
+.language-btn {
+    border: none;
+    background: transparent;
+
+    padding: 9px 17px;
+
+    border-radius: 50px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+
+    color: var(--kotouf-muted);
+
+    transition: .25s ease;
+}
+
+.language-btn:hover {
+    color: var(--kotouf-text);
+}
+
+.language-btn.active {
+    background: var(--kotouf-text);
+    color: white;
+}
+
+
+/* =========================================================
+   DOWNLOAD
+   ========================================================= */
+
+.program-download {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 60px;
+}
+
+.download-btn {
+    border: 1px solid var(--kotouf-text);
+    background: transparent;
+
+    padding: 13px 22px;
+
+    border-radius: 40px;
+
+    cursor: pointer;
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+
+    color: var(--kotouf-text);
+
+    transition: .3s ease;
+}
+
+.download-btn:hover {
+    background: var(--kotouf-text);
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   DAY NAVIGATION
+   ========================================================= */
+
+.day-navigation {
+    max-width: 1000px;
+
+    margin: 0 auto 70px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    border-top: 1px solid var(--kotouf-border);
+    border-bottom: 1px solid var(--kotouf-border);
+}
+
+.day-btn {
+    position: relative;
+
+    background: transparent;
+    border: none;
+
+    padding: 25px 10px;
+
+    cursor: pointer;
+
+    color: var(--kotouf-muted);
+
+    transition: .25s ease;
+}
+
+.day-btn:not(:last-child) {
+    border-right: 1px solid var(--kotouf-border);
+}
+
+.day-btn:hover {
+    color: var(--kotouf-text);
+}
+
+.day-btn.active {
+    color: var(--kotouf-text);
+}
+
+.day-btn.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 20%;
+    right: 20%;
+    bottom: -1px;
+
+    height: 3px;
+
+    background: var(--kotouf-text);
+}
+
+.day-number {
+    display: block;
+
+    font-family: "Archivo", sans-serif;
+    font-weight: 900;
+
+    font-size: 34px;
+    line-height: 1;
+
+    margin-bottom: 7px;
+}
+
+.day-month {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .18em;
+}
+
+
+/* =========================================================
+   DAY CONTENT
+   ========================================================= */
+
+.program-content {
+    max-width: 1050px;
+    margin: auto;
+}
+
+.program-day {
+    display: none;
+
+    animation: fadeProgram .5s ease;
+}
+
+.program-day.active {
+    display: block;
+}
+
+@keyframes fadeProgram {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   DAY HEADING
+   ========================================================= */
+
+.day-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 40px;
+
+    margin-bottom: 55px;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid var(--kotouf-border);
+}
+
+.small-label {
+    display: block;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: .2em;
+
+    color: var(--kotouf-muted);
+
+    margin-bottom: 10px;
+}
+
+.day-heading h3 {
+    margin: 0;
+
+    font-family: "Archivo", sans-serif;
+
+    font-weight: 900;
+
+    font-size: clamp(38px, 6vw, 64px);
+
+    line-height: .95;
+}
+
+.day-heading h3 span {
+    font-size: .35em;
+
+    letter-spacing: .1em;
+
+    color: var(--kotouf-muted);
+}
+
+.day-heading > p {
+    margin: 0;
+
+    max-width: 320px;
+
+    font-size: 13px;
+    line-height: 1.6;
+
+    color: var(--kotouf-muted);
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   SECTION LABEL
+   ========================================================= */
+
+.section-label {
+    margin: 50px 0 25px;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: .2em;
+
+    color: var(--kotouf-muted);
+}
+
+.section-label::after {
+    content: "";
+
+    display: inline-block;
+
+    width: 70px;
+    height: 1px;
+
+    background: var(--kotouf-border);
+
+    vertical-align: middle;
+
+    margin-left: 15px;
+}
+
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+.timeline {
+    position: relative;
+}
+
+.timeline::before {
+    content: "";
+
+    position: absolute;
+
+    left: 92px;
+    top: 0;
+    bottom: 0;
+
+    width: 1px;
+
+    background: var(--kotouf-border);
+}
+
+
+/* =========================================================
+   EVENT CARD
+   ========================================================= */
+
+.prog-event-card {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns: 72px 40px 1fr;
+
+    min-height: 130px;
+
+    padding-bottom: 25px;
+
+    margin-bottom: 25px;
+}
+
+.event-time {
+    padding-top: 5px;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 13px;
+
+    line-height: 1.3;
+
+    text-align: right;
+
+    color: var(--kotouf-muted);
+}
+
+.event-line {
+    position: relative;
+}
+
+.event-line::after {
+    content: "";
+
+    position: absolute;
+
+    top: 9px;
+    left: 20px;
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: var(--kotouf-bg);
+
+    border: 1px solid var(--kotouf-text);
+}
+
+
+/* =========================================================
+   EVENT CONTENT
+   ========================================================= */
+
+.event-content {
+    background: var(--kotouf-card);
+
+    border: 1px solid var(--kotouf-border);
+
+    padding: 27px 30px;
+
+    transition: .3s ease;
+}
+
+.event-content:hover {
+    transform: translateX(5px);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.06);
+}
+
+.event-category {
+    display: inline-block;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .17em;
+
+    color: var(--kotouf-accent);
+
+    margin-bottom: 10px;
+}
+
+.event-content h4 {
+    margin: 0 0 15px;
+
+    font-family: "Archivo", sans-serif;
+
+    font-size: clamp(19px, 2vw, 25px);
+
+    line-height: 1.2;
+
+    font-weight: 700;
+}
+
+.event-person {
+    margin: 0 0 12px;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+.event-description {
+    margin: -7px 0 12px;
+
+    font-size: 12px;
+
+    color: var(--kotouf-muted);
+}
+
+.moderator {
+    margin: 10px 0;
+
+    font-size: 11px;
+
+    color: var(--kotouf-muted);
+
+    line-height: 1.5;
+}
+
+.event-location {
+    display: flex;
+    gap: 7px;
+
+    align-items: center;
+
+    margin-top: 15px;
+
+    padding-top: 13px;
+
+    border-top: 1px solid rgba(29,28,25,.09);
+
+    font-size: 11px;
+
+    color: var(--kotouf-muted);
+}
+
+.event-location span:first-child {
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   FEATURED EVENT
+   ========================================================= */
+
+.featured-event .event-content {
+    border: 1px solid var(--kotouf-accent);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139,94,60,.07),
+            transparent
+        );
+}
+
+.featured-event .event-line::after {
+    background: var(--kotouf-accent);
+
+    border-color: var(--kotouf-accent);
+}
+
+.limited {
+    display: inline-block;
+
+    margin-top: 15px;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background: rgba(139,94,60,.1);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: .08em;
+}
+
+
+/* =========================================================
+   SIMPLE EVENTS
+   ========================================================= */
+
+.simple-event .event-content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.simple-event .event-content h4 {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.program-footer {
+    max-width: 1050px;
+
+    margin: 100px auto 0;
+
+    padding-top: 25px;
+
+    border-top: 1px solid var(--kotouf-border);
+
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 10px;
+
+    letter-spacing: .12em;
+
+    color: var(--kotouf-muted);
+}
+
+.program-footer p {
+    margin: 0;
+}
+
+.program-footer span {
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   ARABIC / RTL
+   ========================================================= */
+
+#kotouf-programme.rtl {
+    direction: rtl;
+}
+
+#kotouf-programme.rtl .day-heading > p {
+    text-align: left;
+}
+
+#kotouf-programme.rtl .event-time {
+    text-align: left;
+}
+
+#kotouf-programme.rtl .timeline::before {
+    left: auto;
+    right: 92px;
+}
+
+#kotouf-programme.rtl .event-line::after {
+    left: auto;
+    right: 20px;
+}
+
+#kotouf-programme.rtl .event-content:hover {
+    transform: translateX(-5px);
+}
+
+#kotouf-programme.rtl .section-label::after {
+    margin-left: 0;
+    margin-right: 15px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    #kotouf-programme {
+        padding: 76px 20px;
+    }
+
+    .program-header h2 {
+        font-size: 65px;
+    }
+
+    .program-subtitle {
+        font-size: 22px;
+    }
+
+    .program-info {
+        flex-direction: column;
+        gap: 4px;
+
+        font-size: 10px;
+    }
+
+    .info-separator {
+        display: none;
+    }
+
+    .day-navigation {
+        margin-bottom: 45px;
+    }
+
+    .day-btn {
+        padding: 18px 5px;
+    }
+
+    .day-number {
+        font-size: 30px;
+    }
+
+    .day-month {
+        font-size: 8px;
+    }
+
+    .day-heading {
+        display: block;
+    }
+
+    .day-heading > p {
+        text-align: left;
+
+        margin-top: 20px;
+    }
+
+    .timeline::before {
+        left: 64px;
+    }
+
+    .prog-event-card {
+        grid-template-columns: 50px 28px 1fr;
+    }
+
+    .event-line::after {
+        left: 14px;
+    }
+
+    .event-content {
+        padding: 20px;
+    }
+
+    .event-content h4 {
+        font-size: 20px;
+    }
+
+    .event-person {
+        font-size: 12px;
+    }
+
+    .program-footer {
+        display: block;
+
+        text-align: center;
+
+        line-height: 2;
+    }
+
+    #kotouf-programme.rtl .timeline::before {
+        right: 64px;
+    }
+
+    #kotouf-programme.rtl .event-line::after {
+        right: 14px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .program-header h2 {
+        font-size: 55px;
+    }
+
+    .day-number {
+        font-size: 25px;
+    }
+
+    .prog-event-card {
+        grid-template-columns: 45px 22px 1fr;
+    }
+
+    .timeline::before {
+        left: 55px;
+    }
+
+    .event-line::after {
+        left: 10px;
+    }
+
+    .event-content {
+        padding: 17px;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+#kotouf-programme button:focus-visible {
+    outline: 3px solid var(--azur);
+    outline-offset: 3px;
+}
+
+
     </style>
   </head>
   <body>
@@ -1342,6 +2165,7 @@
             <li><a href="#apropos">Chniya Hkeytou</a></li>
             <li><a href="#activites">Activités</a></li>
             <li><a href="#evenements">Événements</a></li>
+            <li><a href="#kotouf-programme">Programme</a></li>
             <li><a href="#galerie">Galerie</a></li>
             <li><a href="#actualites">Actualités</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -3223,6 +4047,764 @@
 
       // Footer year
       document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script>
+      // ============================================================
+      // PROGRAMME (KOTOUF 2) — langue, journées, téléchargement
+      // ============================================================
+
+
+/* =========================================================
+   KOTOUF PROGRAM — JAVASCRIPT
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   TRANSLATIONS
+   --------------------------------------------------------- */
+
+const translations = {
+
+    fr: {
+
+        programTitle: "Programme",
+
+        programSubtitle:
+            "Littératures et indépendances",
+
+        download:
+            "Télécharger le programme",
+
+        day:
+            "JOUR",
+
+        day14Title:
+            "Ateliers · Accueil des invités · Visite",
+
+        workshop:
+            "ATELIER",
+
+        educational:
+            "Établissement scolaire",
+
+        languages:
+            "Français · Arabe · Anglais",
+
+        organized:
+            "Organisé par l’UTAIM et HKEYET",
+
+        library:
+            "Bibliothèque municipale de Houmt Souk",
+
+        morning:
+            "Matin · Centre culturel",
+
+        morningLabel:
+            "MATIN",
+
+        afternoon:
+            "APRÈS-MIDI & SOIRÉE",
+
+        conference:
+            "Salle de conférence",
+
+        firstFloor:
+            "Salle au 1er étage",
+
+        garden:
+            "Jardin",
+
+        hall:
+            "Hall",
+
+        moderation:
+            "Modération",
+
+        lunchTable:
+            "Déjeuner : Table des Indépendances",
+
+        childrenPresentation:
+            "Les enfants : présentation",
+
+        multipleLocations:
+            "Jardin · Jardin · Salle de conférence",
+
+        sunset:
+            "Coucher de soleil",
+
+        fort:
+            "Fort Borj Ghazi Mustapha",
+
+        limited:
+            "Places limitées",
+
+        freeDinner:
+            "Dîner libre",
+
+        standup:
+            "Stand-up — Mehdi Bachtarzi",
+
+        culturalCenter:
+            "Centre culturel",
+
+        multipleRooms:
+            "Jardin devant · Jardin arrière · Salle de conférence · Salle en haut",
+
+        children:
+            "Activité pour enfants",
+
+        childrenActivity:
+            "ACTIVITÉ POUR ENFANTS",
+
+        registration:
+            "Places limitées — sur inscription",
+
+        sea:
+            "Bateau / Mer",
+
+        lunch:
+            "Déjeuner",
+
+        footerText:
+            "Festival des Littératures",
+
+        event1:
+            "Atelier d’écriture en français",
+
+        event2:
+            "Atelier d’écriture de scénario BD",
+
+        event3:
+            "Mots et mets – Atelier d’écriture d’une recette",
+
+        event4:
+            "Atelier son",
+
+        event5:
+            "Atelier d’écriture en arabe",
+
+        event6:
+            "Ouverture : lecture du poème d’Aboul Kacem Chebbi par un élève",
+
+        event7:
+            "Dialogue autour du sens des indépendances",
+
+        event8:
+            "Écrire les libertés",
+
+        event9:
+            "Conte & oralité vivante",
+
+        event10:
+            "Comment le Sud écrit ses indépendances",
+
+        event11:
+            "Séance de dédicaces des invités principaux",
+
+        event13:
+            "Ouverture de Kotouf 2",
+
+        event14:
+            "Conversation croisée : « Indépendance : rupture ou continuité ? »",
+
+        event15:
+            "Le passage du jour — lectures en musique",
+
+        event17:
+            "Restitution enfants : ateliers",
+
+        event18:
+            "Dialogue intergénérationnel",
+
+        event19:
+            "نوافذ — Signatures & présentations",
+
+        event21:
+            "Projection du film Fanon",
+
+        event23:
+            "Danses et indépendances",
+
+        event24:
+            "Dîner libre en musique & lectures spontanées",
+
+        event25:
+            "Marines — Contes en mer"
+
+    },
+
+
+    en: {
+
+        programTitle:
+            "Program",
+
+        programSubtitle:
+            "Literatures and Independences",
+
+        download:
+            "Download the program",
+
+        day:
+            "DAY",
+
+        day14Title:
+            "Workshops · Guest welcome · Tour",
+
+        workshop:
+            "WORKSHOP",
+
+        educational:
+            "Educational institution",
+
+        languages:
+            "French · Arabic · English",
+
+        organized:
+            "Organized by UTAIM and HKEYET",
+
+        library:
+            "Houmt Souk Municipal Library",
+
+        morning:
+            "Morning · Cultural Center",
+
+        morningLabel:
+            "MORNING",
+
+        afternoon:
+            "AFTERNOON & EVENING",
+
+        conference:
+            "Conference room",
+
+        firstFloor:
+            "1st floor room",
+
+        garden:
+            "Garden",
+
+        hall:
+            "Hall",
+
+        moderation:
+            "Moderation",
+
+        lunchTable:
+            "Lunch: Table of Independences",
+
+        childrenPresentation:
+            "Children: presentation",
+
+        multipleLocations:
+            "Garden · Garden · Conference room",
+
+        sunset:
+            "Sunset",
+
+        fort:
+            "Borj Ghazi Mustapha Fort",
+
+        limited:
+            "Limited seats",
+
+        freeDinner:
+            "Free dinner",
+
+        standup:
+            "Stand-up comedy — Mehdi Bachtarzi",
+
+        culturalCenter:
+            "Cultural Center",
+
+        multipleRooms:
+            "Front garden · Back garden · Conference room · Upper room",
+
+        children:
+            "Activity for children",
+
+        childrenActivity:
+            "ACTIVITY FOR CHILDREN",
+
+        registration:
+            "Limited seats — registration required",
+
+        sea:
+            "Boat / Sea",
+
+        lunch:
+            "Lunch",
+
+        footerText:
+            "Festival of Literatures",
+
+        event1:
+            "French writing workshop",
+
+        event2:
+            "Comic book scriptwriting workshop",
+
+        event3:
+            "Words & Dishes – A Recipe-Writing Workshop",
+
+        event4:
+            "Sound workshop",
+
+        event5:
+            "Arabic writing workshop",
+
+        event6:
+            "Opening: reading of Aboul Kacem Chebbi's poem by a student",
+
+        event7:
+            "Dialogue around the meaning of independences",
+
+        event8:
+            "Writing freedoms",
+
+        event9:
+            "Storytelling & living oral tradition",
+
+        event10:
+            "How the South writes its independences",
+
+        event11:
+            "Book signing session with the main guests",
+
+        event13:
+            "Opening of Kotouf 2",
+
+        event14:
+            "Crossed conversation: “Independence: rupture or continuity?”",
+
+        event15:
+            "The passing of the day — readings with music",
+
+        event17:
+            "Children's feedback: workshops",
+
+        event18:
+            "Intergenerational dialogue",
+
+        event19:
+            "نوافذ — Signatures & presentations",
+
+        event21:
+            "Screening of the film Fanon",
+
+        event23:
+            "Dances and independences",
+
+        event24:
+            "Free dinner with music & spontaneous readings",
+
+        event25:
+            "Marine themes — Tales at sea"
+
+    },
+
+
+    ar: {
+
+        programTitle:
+            "البرنامج",
+
+        programSubtitle:
+            "الأدب والتحرر",
+
+        download:
+            "تحميل البرنامج",
+
+        day:
+            "اليوم",
+
+        day14Title:
+            "ورشات · استقبال الضيوف · زيارة",
+
+        workshop:
+            "ورشة",
+
+        educational:
+            "مؤسسة تربوية",
+
+        languages:
+            "فرنسية · عربية · إنجليزية",
+
+        organized:
+            "بتنظيم من UTAIM و HKEYET",
+
+        library:
+            "المكتبة العمومية بحومة السوق",
+
+        morning:
+            "صباحاً · المركز الثقافي",
+
+        morningLabel:
+            "صباحاً",
+
+        afternoon:
+            "بعد الظهر والمساء",
+
+        conference:
+            "قاعة المحاضرات",
+
+        firstFloor:
+            "القاعة بالطابق الأول",
+
+        garden:
+            "الحديقة",
+
+        hall:
+            "الردهة",
+
+        moderation:
+            "الإدارة",
+
+        lunchTable:
+            "استراحة: طاولة الاستقلال",
+
+        childrenPresentation:
+            "تقديم الأطفال",
+
+        multipleLocations:
+            "الحديقة · الحديقة · قاعة المحاضرات",
+
+        sunset:
+            "سحر الغروب",
+
+        fort:
+            "برج غازي مصطفى",
+
+        limited:
+            "أماكن محدودة",
+
+        freeDinner:
+            "عشاء حر",
+
+        standup:
+            "عرض — مهدي بشطارزي",
+
+        culturalCenter:
+            "المركز الثقافي",
+
+        multipleRooms:
+            "الحديقة الأمامية · الحديقة الخلفية · قاعة المحاضرات · القاعة بالطابق العلوي",
+
+        children:
+            "نشاط للأطفال",
+
+        childrenActivity:
+            "نشاط للأطفال",
+
+        registration:
+            "أماكن محدودة — التسجيل مطلوب",
+
+        sea:
+            "قارب / البحر",
+
+        lunch:
+            "الغداء",
+
+        footerText:
+            "مهرجان الأدب",
+
+        event1:
+            "ورشة كتابة باللغة الفرنسية",
+
+        event2:
+            "ورشة كتابة سيناريو قصص مصورة",
+
+        event3:
+            "كلمات وأطباق – ورشة كتابة وصفة طهي",
+
+        event4:
+            "ورشة صوتية",
+
+        event5:
+            "ورشة كتابة باللغة العربية",
+
+        event6:
+            "الافتتاح: قراءة قصيدة لأبي القاسم الشابي من قبل أحد التلاميذ",
+
+        event7:
+            "حوار حول معنى التحرر",
+
+        event8:
+            "كتابة الحريات",
+
+        event9:
+            "الحكي والشفوية الحية",
+
+        event10:
+            "كيف يكتب الجنوب استقلالاته",
+
+        event11:
+            "جلسة توقيع الكتب للضيوف الرئيسيين",
+
+        event13:
+            "افتتاح قطوف 2",
+
+        event14:
+            "حوار متقاطع: «التحرر: قطيعة أم تواصل؟»",
+
+        event15:
+            "سحر الغروب — قراءات على أنغام الناي",
+
+        event17:
+            "عرض أعمال ورشات الأطفال",
+
+        event18:
+            "حوار التحرر بين الأجيال",
+
+        event19:
+            "نوافذ — توقيعات وتقديمات",
+
+        event21:
+            "عرض فيلم فانون",
+
+        event23:
+            "رقصات التحرر",
+
+        event24:
+            "عشاء حر بالموسيقى وقراءات عفوية",
+
+        event25:
+            "أشرعة قطوف — قصص في البحر"
+
+    }
+
+};
+
+
+/* ---------------------------------------------------------
+   LANGUAGE
+   --------------------------------------------------------- */
+
+const languageButtons =
+    document.querySelectorAll(".language-btn");
+
+const programSection =
+    document.getElementById("kotouf-programme");
+
+
+function changeLanguage(language) {
+
+    const dictionary =
+        translations[language];
+
+    if (!dictionary) return;
+
+
+    /*
+     * Change text
+     */
+    document
+        .querySelectorAll("[data-i18n]")
+        .forEach(element => {
+
+            const key =
+                element.getAttribute("data-i18n");
+
+            if (dictionary[key]) {
+
+                element.textContent =
+                    dictionary[key];
+
+            }
+
+        });
+
+
+    /*
+     * Active language button
+     */
+    languageButtons.forEach(button => {
+
+        button.classList.toggle(
+            "active",
+            button.dataset.lang === language
+        );
+
+    });
+
+
+    /*
+     * RTL for Arabic
+     */
+    if (language === "ar") {
+
+        programSection.classList.add("rtl");
+
+        document.documentElement.lang = "ar";
+
+    } else {
+
+        programSection.classList.remove("rtl");
+
+        document.documentElement.lang = language;
+
+    }
+
+
+    /*
+     * Save language
+     */
+    localStorage.setItem(
+        "kotoufLanguage",
+        language
+    );
+
+}
+
+
+languageButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => changeLanguage(button.dataset.lang)
+    );
+
+});
+
+
+/* ---------------------------------------------------------
+   DAY SWITCHING
+   --------------------------------------------------------- */
+
+const dayButtons =
+    document.querySelectorAll(".day-btn");
+
+const programDays =
+    document.querySelectorAll(".program-day");
+
+
+dayButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const selectedDay =
+            button.dataset.day;
+
+
+        /*
+         * Buttons
+         */
+        dayButtons.forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+        button.classList.add("active");
+
+
+        /*
+         * Content
+         */
+        programDays.forEach(day => {
+
+            day.classList.remove("active");
+
+        });
+
+        const target =
+            document.getElementById(
+                "day-" + selectedDay
+            );
+
+        if (target) {
+
+            target.classList.add("active");
+
+        }
+
+
+        /*
+         * Scroll softly to program
+         */
+        const content =
+            document.querySelector(".program-content");
+
+        if (window.innerWidth < 700) {
+
+            content.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+    });
+
+});
+
+
+/* ---------------------------------------------------------
+   DOWNLOAD PROGRAM
+   --------------------------------------------------------- */
+
+const downloadButton =
+    document.getElementById("downloadProgram");
+
+
+downloadButton.addEventListener(
+    "click",
+    () => {
+
+        const language =
+            localStorage.getItem(
+                "kotoufLanguage"
+            ) || "fr";
+
+
+        /*
+         * CHANGE THESE FILE NAMES
+         * TO YOUR ACTUAL PDF FILES
+         */
+
+        const files = {
+
+            fr:
+                "programme-kotouf-fr.pdf",
+
+            en:
+                "programme-kotouf-en.pdf",
+
+            ar:
+                "programme-kotouf-ar.pdf"
+
+        };
+
+
+        const file =
+            files[language];
+
+
+        /*
+         * Open the PDF
+         */
+        window.open(
+            file,
+            "_blank"
+        );
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   INITIAL LANGUAGE
+   --------------------------------------------------------- */
+
+const savedLanguage =
+    localStorage.getItem(
+        "kotoufLanguage"
+    ) || "fr";
+
+
+changeLanguage(savedLanguage);
+
+
     </script>
   </body>
 </html>
