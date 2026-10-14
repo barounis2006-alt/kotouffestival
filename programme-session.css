@@ -1,0 +1,9 @@
+
+/* Sessions parallèles au sein d'une même carte (Hikayet Kotouf, ateliers de 15h30) */
+#kotouf-programme .event-session {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(0, 0, 0, .15);
+}
+#kotouf-programme .event-session:first-of-type { margin-top: 10px; }
+#kotouf-programme .event-session h4 { margin-bottom: 6px; font-size: 1em; }
