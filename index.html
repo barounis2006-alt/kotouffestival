@@ -16,6 +16,51 @@
       property="og:description"
       content="Association culturelle djerbienne dédiée à la littérature, la lecture et la rencontre avec les auteurs."
     />
+    <link rel="canonical" href="https://festivalkotouf.tn/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#153650" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://festivalkotouf.tn/" />
+    <meta property="og:site_name" content="Kotouf" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:image"
+      content="https://festivalkotouf.tn/images/504080804_122120298578844699_224228718653671833_n.jpg"
+    />
+    <meta
+      property="og:image:alt"
+      content="Cavalier traversant la mer à cheval au large de Djerba, au coucher du soleil"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Kotouf — Festival des Littératures du Sud"
+    />
+    <meta
+      name="twitter:description"
+      content="Association culturelle djerbienne dédiée à la littérature, la lecture et la rencontre avec les auteurs."
+    />
+    <meta
+      name="twitter:image"
+      content="https://festivalkotouf.tn/images/504080804_122120298578844699_224228718653671833_n.jpg"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Kotouf",
+        "alternateName": "Festival des Littératures du Sud",
+        "url": "https://festivalkotouf.tn/",
+        "logo": "https://festivalkotouf.tn/images/logo-kotouf.jpg",
+        "description": "Association culturelle à but non lucratif qui promeut la littérature et la lecture à Djerba, en Tunisie.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Houmt Souk",
+          "addressRegion": "Djerba",
+          "addressCountry": "TN"
+        }
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -177,6 +222,50 @@
       .arch {
         clip-path: url(#arch-clip);
         -webkit-clip-path: url(#arch-clip);
+      }
+
+      /* ============ LENIS (défilement fluide) ============ */
+      html.lenis,
+      html.lenis body {
+        height: auto;
+      }
+      .lenis.lenis-smooth {
+        scroll-behavior: auto !important;
+      }
+      .lenis.lenis-smooth [data-lenis-prevent] {
+        overscroll-behavior: contain;
+      }
+      .lenis.lenis-stopped {
+        overflow: hidden;
+      }
+      .hero-media {
+        overflow: hidden;
+      }
+      .split-word {
+        display: inline-block;
+        will-change: transform, opacity;
+      }
+      .form-error {
+        display: none;
+        background: #fbeee8;
+        border: 1.5px solid #c15a2c;
+        color: #8a3a17;
+        border-radius: 10px;
+        padding: 16px 18px;
+        font-family: "Archivo", sans-serif;
+        font-weight: 600;
+        font-size: 0.92rem;
+        margin-bottom: 20px;
+      }
+      .form-error.show {
+        display: block;
+      }
+      .hp-field {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
       }
 
       /* ============ SCROLL REVEAL ============ */
@@ -3129,8 +3218,19 @@
           <form
             class="volunteer reveal reveal-2"
             id="volunteer-form"
+            action="https://formspree.io/f/mvkgooyq"
+            method="POST"
             novalidate
           >
+            <input type="hidden" name="_subject" value="Nouvelle candidature bénévole — Kotouf" />
+            <div class="hp-field" aria-hidden="true">
+              <label for="website">Ne pas remplir</label>
+              <input type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off" />
+            </div>
+            <div class="form-error" id="form-error" role="alert">
+              Oups, l'envoi a échoué. Merci de réessayer dans un instant ou de
+              nous écrire directement par email.
+            </div>
             <div class="form-success" id="form-success">
               <svg
                 width="20"
@@ -3352,18 +3452,39 @@
         revealEls.forEach((el) => el.classList.add("in-view"));
       }
 
-      // Volunteer form — client-side only confirmation (no backend wired up)
+      // Volunteer form — envoi réel via Formspree
       const form = document.getElementById("volunteer-form");
       const success = document.getElementById("form-success");
-      form.addEventListener("submit", (e) => {
+      const formError = document.getElementById("form-error");
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
         if (!form.checkValidity()) {
           form.reportValidity();
           return;
         }
-        success.classList.add("show");
-        form.reset();
-        success.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const btnLabel = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Envoi en cours…";
+        formError.classList.remove("show");
+        success.classList.remove("show");
+        try {
+          const res = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { Accept: "application/json" },
+          });
+          if (!res.ok) throw new Error("Formspree " + res.status);
+          success.classList.add("show");
+          form.reset();
+          success.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        } catch (err) {
+          formError.classList.add("show");
+          formError.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = btnLabel;
+        }
       });
 
       // Footer year
@@ -4248,6 +4369,108 @@ const savedLanguage =
 changeLanguage(savedLanguage);
 
 
+    </script>
+    <!-- ================= GSAP + LENIS ================= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script>
+      (function () {
+        // Sans GSAP (CDN bloqué) ou avec "réduire les animations" : le site reste normal.
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion || !window.gsap || !window.ScrollTrigger) return;
+        gsap.registerPlugin(ScrollTrigger);
+
+        var siteHeader = document.getElementById("site-header");
+
+        /* ---------- Lenis : défilement fluide ---------- */
+        var lenis = null;
+        if (window.Lenis) {
+          lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+          lenis.on("scroll", ScrollTrigger.update);
+          gsap.ticker.add(function (time) {
+            lenis.raf(time * 1000);
+          });
+          gsap.ticker.lagSmoothing(0);
+
+          // Ancres (#section) avec décalage de l'en-tête fixe
+          document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+            a.addEventListener("click", function (e) {
+              var id = a.getAttribute("href");
+              if (!id || id.length <= 1) return;
+              var target = document.querySelector(id);
+              if (!target) return;
+              e.preventDefault();
+              lenis.scrollTo(target, {
+                offset: -(siteHeader ? siteHeader.offsetHeight : 0) + 1,
+              });
+            });
+          });
+        }
+
+        /* ---------- GSAP : entrée du hero ---------- */
+        var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        tl.from(".hero h1", { y: 40, opacity: 0, duration: 1, clearProps: "transform,opacity" })
+          .from(".hero .lead", { y: 24, opacity: 0, duration: 0.8, clearProps: "transform,opacity" }, "-=0.6")
+          .from(".hero-actions .btn", { y: 20, opacity: 0, duration: 0.6, stagger: 0.12, clearProps: "transform,opacity" }, "-=0.5")
+          .from(".hero .scroll-cue", { opacity: 0, duration: 0.8, clearProps: "opacity" }, "-=0.3");
+
+        /* ---------- GSAP : parallaxe de l'image du hero ---------- */
+        var heroImg = document.querySelector(".hero-media img");
+        if (heroImg) {
+          gsap.set(heroImg, { scale: 1.15, transformOrigin: "center center" });
+          gsap.to(heroImg, {
+            yPercent: 7,
+            ease: "none",
+            scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true },
+          });
+        }
+
+        /* ---------- Style React Bits : titres mot par mot (SplitText) ---------- */
+        document.querySelectorAll("main h2").forEach(function (h2) {
+          if (h2.childElementCount > 0 || h2.hasAttribute("data-i18n")) return;
+          var text = h2.textContent.trim();
+          if (!text) return;
+          h2.setAttribute("aria-label", text);
+          h2.classList.remove("reveal"); // GSAP prend le relais du reveal CSS
+          h2.textContent = "";
+          text.split(/\s+/).forEach(function (word, i, arr) {
+            var span = document.createElement("span");
+            span.className = "split-word";
+            span.setAttribute("aria-hidden", "true");
+            span.textContent = word;
+            h2.appendChild(span);
+            if (i < arr.length - 1) h2.appendChild(document.createTextNode(" "));
+          });
+          gsap.from(h2.querySelectorAll(".split-word"), {
+            y: 30,
+            opacity: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            stagger: 0.07,
+            scrollTrigger: { trigger: h2, start: "top 85%", once: true },
+          });
+        });
+
+        /* ---------- Style React Bits : boutons magnétiques (Magnet) ---------- */
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+          document.querySelectorAll('.btn:not([type="submit"])').forEach(function (btn) {
+            btn.addEventListener("mousemove", function (e) {
+              var r = btn.getBoundingClientRect();
+              var dx = e.clientX - (r.left + r.width / 2);
+              var dy = e.clientY - (r.top + r.height / 2);
+              gsap.to(btn, { x: dx * 0.25, y: dy * 0.25, duration: 0.3, ease: "power2.out" });
+            });
+            btn.addEventListener("mouseleave", function () {
+              gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" });
+            });
+          });
+        }
+
+        window.addEventListener("load", function () {
+          ScrollTrigger.refresh();
+        });
+      })();
     </script>
   </body>
 </html>
